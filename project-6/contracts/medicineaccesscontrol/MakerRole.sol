@@ -11,10 +11,10 @@ contract MakerRole {
   event MakerAdded(address indexed account);
   event MakerRemoved(address indexed account);
 
-  // Define a struct 'farmers' by inheriting from 'Roles' library, struct Role
-  Roles.Role private farmers;
+  // Define a struct 'maker' by inheriting from 'Roles' library, struct Role
+  Roles.Role private makers;
 
-  // In the constructor make the address that deploys this contract the 1st farmer
+  // In the constructor make the address that deploys this contract the 1st maker
   constructor() public {
     _addMaker(msg.sender);
   }
@@ -27,7 +27,7 @@ contract MakerRole {
 
   // Define a function 'isMaker' to check this role
   function isMaker(address account) public view returns (bool) {
-    return farmers.has(account);
+    return makers.has(account);
   }
 
   // Define a function 'addMaker' that adds this role
@@ -42,13 +42,13 @@ contract MakerRole {
 
   // Define an internal function '_addMaker' to add this role, called by 'addv'
   function _addMaker(address account) internal {
-    farmers.add(account);
+    makers.add(account);
     emit MakerAdded(account);
   }
 
   // Define an internal function '_removeMaker' to remove this role, called by 'removeMaker'
   function _removeMakerMaker(address account) internal {
-    farmers.remove(account);
+    makers.remove(account);
     emit MakerRemoved(account);
   }
 }
