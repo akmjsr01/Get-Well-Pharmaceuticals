@@ -46,10 +46,3 @@ contract PatientRole {
     
   }
 }
-
-    © 2019 GitHub, Inc.
-    Terms
-    Privacy
-    Security
-    Status
-    H
