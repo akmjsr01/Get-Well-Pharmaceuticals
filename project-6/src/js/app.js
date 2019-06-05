@@ -11,11 +11,11 @@ App = {
     originFactoryInformation: null,
     originFactoryLatitude: null,
     originFactoryLongitude: null,
-    productNotes: null,
-    productPrice: 0,
+    medicineNotes: null,
+    medicinePrice: 0,
     distributorID: "0x0000000000000000000000000000000000000000",
-    retailerID: "0x0000000000000000000000000000000000000000",
-    consumerID: "0x0000000000000000000000000000000000000000",
+    pharmacyID: "0x0000000000000000000000000000000000000000",
+    patientID: "0x0000000000000000000000000000000000000000",
 
     init: async function () {
         App.readForm();
@@ -32,11 +32,11 @@ App = {
         App.originFactoryInformation = $("#originFactoryInformation").val();
         App.originFactoryLatitude = $("#originFactoryLatitude").val();
         App.originFactoryLongitude = $("#originFactoryLongitude").val();
-        App.productNotes = $("#productNotes").val();
-        App.productPrice = $("#productPrice").val();
+        App.medicineNotes = $("#medicineNotes").val();
+        App.medicinePrice = $("#medicinePrice").val();
         App.distributorID = $("#distributorID").val();
-        App.retailerID = $("#retailerID").val();
-        App.consumerID = $("#consumerID").val();
+        App.pharmacyID = $("#pharmacyID").val();
+        App.patientID = $("#patientID").val();
 
         console.log(
             App.sku,
@@ -47,11 +47,11 @@ App = {
             App.originFactoryInformation, 
             App.originFactoryLatitude, 
             App.originFactoryLongitude, 
-            App.productNotes, 
-            App.productPrice, 
+            App.medicineNotes, 
+            App.medicinePrice, 
             App.distributorID, 
-            App.retailerID, 
-            App.consumerID
+            App.pharmacyID, 
+            App.patientID
         );
     },
 
@@ -175,7 +175,7 @@ App = {
                 App.originFactoryInformation, 
                 App.originFactoryLatitude, 
                 App.originFactoryLongitude, 
-                App.productNotes
+                App.medicineNotes
             );
         }).then(function(result) {
             $("#ftc-item").text(result);
@@ -218,9 +218,9 @@ App = {
         var processId = parseInt($(event.target).data('id'));
 
         App.contracts.SupplyChain.deployed().then(function(instance) {
-            const productPrice = web3.toWei(1, "ether");
-            console.log('productPrice',productPrice);
-            return instance.sellItem(App.upc, App.productPrice, {from: App.metamaskAccountID});
+            const medicinePrice = web3.toWei(1, "ether");
+            console.log('medicinePrice',medicinePrice);
+            return instance.sellItem(App.upc, App.medicinePrice, {from: App.metamaskAccountID});
         }).then(function(result) {
             $("#ftc-item").text(result);
             console.log('sellItem',result);
