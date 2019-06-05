@@ -131,7 +131,7 @@ App = {
 
         switch(processId) {
             case 1:
-                return await App.harvestItem(event);
+                return await App.researchItem(event);
                 break;
             case 2:
                 return await App.processItem(event);
@@ -163,12 +163,12 @@ App = {
             }
     },
 
-    harvestItem: function(event) {
+    researchItem: function(event) {
         event.preventDefault();
         var processId = parseInt($(event.target).data('id'));
 
         App.contracts.SupplyChain.deployed().then(function(instance) {
-            return instance.harvestItem(
+            return instance.researchItem(
                 App.upc, 
                 App.metamaskAccountID, 
                 App.originFactoryName, 
@@ -179,7 +179,7 @@ App = {
             );
         }).then(function(result) {
             $("#ftc-item").text(result);
-            console.log('harvestItem',result);
+            console.log('researchItem',result);
         }).catch(function(err) {
             console.log(err.message);
         });
