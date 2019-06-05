@@ -37,7 +37,7 @@ contract SupplyChain is MakerRole, DistributorRole, PharmacyRole, PatientRole{
     Purchased   // 7
   }
 
-  State constant defaultState = State.Harvested;
+  State constant defaultState = State.researched;
 
   // Define a struct 'Item' with the following fields:
   struct Item {
@@ -59,7 +59,7 @@ contract SupplyChain is MakerRole, DistributorRole, PharmacyRole, PatientRole{
   }
 
   // Define 8 events with the same 8 state values and accept 'upc' as input argument
-  event Harvested(uint upc);
+  event researched(uint upc);
   event Processed(uint upc);
   event Packed(uint upc);
   event ForSale(uint upc);
@@ -94,9 +94,9 @@ contract SupplyChain is MakerRole, DistributorRole, PharmacyRole, PatientRole{
     items[_upc].patientID.transfer(amountToReturn);
   }
 
-  // Define a modifier that checks if an item.state of a upc is Harvested
-  modifier harvested(uint _upc) {
-    require(items[_upc].itemState == State.Harvested);
+  // Define a modifier that checks if an item.state of a upc is researched
+  modifier researched(uint _upc) {
+    require(items[_upc].itemState == State.researched);
     _;
   }
 
@@ -158,12 +158,12 @@ contract SupplyChain is MakerRole, DistributorRole, PharmacyRole, PatientRole{
     }
   }
 
-  // Define a function 'harvestItem' that allows a farmer to mark an item 'Harvested'
-  function harvestItem(uint _upc, address _originMakerID, string _originFactoryName, string _originFactoryInformation, string  _originFactoryLatitude, string  _originFactoryLongitude, string  _medicineNotes) public
+  // Define a function 'researchItem' that allows a farmer to mark an item 'researched'
+  function researchItem(uint _upc, address _originMakerID, string _originFactoryName, string _originFactoryInformation, string  _originFactoryLatitude, string  _originFactoryLongitude, string  _medicineNotes) public
   {
     //Combine sku and upc to create a medicine id
     uint medicineID = _upc + sku;
-    // Add the new item as part of Harvest
+    // Add the new item as part of Research
     items[_upc].sku = sku;
     items[_upc].upc = _upc;
     items[_upc].ownerID = owner;
@@ -175,21 +175,21 @@ contract SupplyChain is MakerRole, DistributorRole, PharmacyRole, PatientRole{
     items[_upc].medicineID = medicineID;
     items[_upc].medicineNotes = _medicineNotes;
     items[_upc].medicinePrice = 0;
-    items[_upc].itemState = State.Harvested;
+    items[_upc].itemState = State.researched;
     items[_upc].distributorID = address(0);
     items[_upc].pharmacyID = address(0);
     items[_upc].patientID = address(0);
     // Increment sku
     sku = sku + 1;
     // Emit the appropriate event
-    emit Harvested(_upc);
+    emit researched(_upc);
 
   }
 
   // Define a function 'processtItem' that allows a farmer to mark an item 'Processed'
   function processItem(uint _upc) public
     // Call modifier to check if upc has passed previous supply chain stage
-  harvested(_upc)
+  researched(_upc)
     // Call modifier to verify caller of this function
   verifyCaller(items[_upc].originMakerID)
   {
