@@ -8,9 +8,9 @@ contract PatientRole {
 
   // Define 2 events, one for Adding, and other for Removing
 
-  // Define a struct 'consumers' by inheriting from 'Roles' library, struct Role
+  // Define a struct 'patients' by inheriting from 'Roles' library, struct Role
 
-  // In the constructor make the address that deploys this contract the 1st consumer
+  // In the constructor make the address that deploys this contract the 1st patient
   constructor() public {
     
   }
