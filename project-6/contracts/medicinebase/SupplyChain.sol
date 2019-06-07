@@ -4,9 +4,10 @@ import "../medicineaccesscontrol/PatientRole.sol";
 import "../medicineaccesscontrol/DistributorRole.sol";
 import "../medicineaccesscontrol/MakerRole.sol";
 import "../medicineaccesscontrol/PharmacyRole.sol";
+import "../medicinecore/Ownable.sol";
 
 // Define a contract 'Supplychain'
-contract SupplyChain is MakerRole, DistributorRole, PharmacyRole, PatientRole{
+contract SupplyChain is MakerRole, DistributorRole, PharmacyRole, PatientRole, Ownable{
 
   // Define 'owner'
   address owner;
