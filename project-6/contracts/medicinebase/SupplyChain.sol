@@ -7,7 +7,7 @@ import "../medicineaccesscontrol/PharmacyRole.sol";
 import "../medicinecore/Ownable.sol";
 
 // Define a contract 'Supplychain'
-contract SupplyChain is MakerRole, DistributorRole, PharmacyRole, PatientRole, Ownable{
+contract SupplyChain is Ownable, MakerRole, DistributorRole, PharmacyRole, PatientRole, Ownable{
 
   // Define 'owner'
   address owner;
@@ -60,7 +60,7 @@ contract SupplyChain is MakerRole, DistributorRole, PharmacyRole, PatientRole, O
   }
 
   // Define 8 events with the same 8 state values and accept 'upc' as input argument
-  event researched(uint upc);
+  event Researched(uint upc);
   event Processed(uint upc);
   event Packed(uint upc);
   event ForSale(uint upc);
