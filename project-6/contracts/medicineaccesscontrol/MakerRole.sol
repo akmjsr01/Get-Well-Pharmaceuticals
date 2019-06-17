@@ -47,7 +47,7 @@ contract MakerRole {
   }
 
   // Define an internal function '_removeMaker' to remove this role, called by 'removeMaker'
-  function _removeMakerMaker(address account) internal {
+  function _removeMaker(address account) internal {
     makers.remove(account);
     emit MakerRemoved(account);
   }
